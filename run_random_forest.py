@@ -11,7 +11,7 @@ features = ['engaged_with_user_follower_count',
             'engagee_follows_engager']
 label_column = 'label'
 
-df = pd.read_csv('class_dataframe.tsv', sep='\t')
+df = pd.read_csv('class_dataframe_train.tsv', sep='\t')
 df = df.loc[df['label'] != 'no_engagement']
 pd.concat([df.loc[df['label'] == 'like_timestamp'][:10000],
            df.loc[df['label'] == 'reply_timestamp'][:10000],
@@ -30,7 +30,7 @@ y_test = df[label_column]
 
 print('done reading test')
 
-clf = RandomForestClassifier(n_estimators=200, max_depth=10, random_state=0)
+clf = RandomForestClassifier(n_estimators=200, max_depth=10)
 clf.fit(X_train, y_train)
 y_pred = clf.predict(X_test)
 print('done training')
